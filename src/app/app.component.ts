@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ollas-front';
+  isOpen = false;
+
+  toggleSideBar(): void {
+    this.isOpen = !this.isOpen;
+  }
 }
