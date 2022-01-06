@@ -6,6 +6,7 @@ import { OllaService } from "./olla.service";
 import { MatTableModule } from "@angular/material/table";
 import { AppSharedModule } from '../../app-shared.module';
 import { OllaFormComponent } from './olla-form.component';
+import { TipoSelectorModule } from '../tipo/selector/tipo-selector.module';
 
 const routes: Routes = [
     {
@@ -23,7 +24,8 @@ const routes: Routes = [
         AppSharedModule,
         RouterModule.forChild( routes ),
         HttpClientModule,
-        MatTableModule
+        MatTableModule,
+        TipoSelectorModule
     ],
     declarations: [ OllaList, OllaFormComponent ],
     providers: [ OllaService ]

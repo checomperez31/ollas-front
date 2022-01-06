@@ -1,12 +1,15 @@
 import { NgModule } from "@angular/core";
 import { MatButtonModule } from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
     imports: [
-        MatButtonModule
+        MatButtonModule,
+        MatInputModule
     ],
     exports: [
-        MatButtonModule
+        MatButtonModule,
+        MatInputModule
     ]
 })
 export class AppSharedModule {}

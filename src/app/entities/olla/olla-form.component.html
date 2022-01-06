@@ -3,11 +3,17 @@
         <div class="c-20">
             <h3>Creación de olla</h3>
         </div>
-        <div class="c20">
-            Aqui va a ir el textarea con la descripción de la olla
-        </div>
         <div class="c-20">
-            Aqui va a ir el selector de tipo de la olla
+            <mat-form-field appearance="outline">
+                <mat-label>Descripción</mat-label>
+                <textarea matInput type="text" placeholder="Información de la olla" required></textarea>
+            </mat-form-field>
+        </div>
+        <div class="c20">
+            <button mat-flat-button (click)="openSelector()">
+                abrir modal
+            </button>
+            Aqui se va a poner el selector de tipos
         </div>
     </div>
 </div>
