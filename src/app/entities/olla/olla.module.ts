@@ -1,5 +1,5 @@
 import { HttpClientModule } from "@angular/common/http";
-import { NgModule } from "@angular/core";
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
 import { OllaList } from "./olla-list.component";
 import { OllaService } from "./olla.service";
@@ -7,6 +7,7 @@ import { MatTableModule } from "@angular/material/table";
 import { AppSharedModule } from '../../app-shared.module';
 import { OllaFormComponent } from './olla-form.component';
 import { TipoSelectorModule } from '../tipo/selector/tipo-selector.module';
+import { DecoradoMultipleSelectorModule } from '../decorado/multiple-selector/decorado-multiple-selector.module';
 
 const routes: Routes = [
     {
@@ -25,9 +26,11 @@ const routes: Routes = [
         RouterModule.forChild( routes ),
         HttpClientModule,
         MatTableModule,
-        TipoSelectorModule
+        TipoSelectorModule,
+        DecoradoMultipleSelectorModule
     ],
     declarations: [ OllaList, OllaFormComponent ],
-    providers: [ OllaService ]
+    providers: [ OllaService ],
+    schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class OllaModule {}

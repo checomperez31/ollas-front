@@ -3,9 +3,14 @@
         Seleccione el tipo de olla
     </div>
     <div mat-dialog-content>
-        Aqui ira el listado de ollas
+        <mat-selection-list [multiple]="false">
+            <mat-list-option *ngFor="let tipo of entities" (click)="selectOption( tipo )">
+                <mat-icon matListIcon>folder</mat-icon>
+                <h3 matLine>{{tipo.description}}</h3>
+            </mat-list-option>
+        </mat-selection-list>
     </div>
-    <mat-dialog-actions align="end">
+    <div mat-dialog-actions align="end">
         <button mat-button (click)="close()">Cerrar</button>
-    </mat-dialog-actions>
+    </div>
 </div>

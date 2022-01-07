@@ -32,6 +32,11 @@ export class HttpService<X> {
         return this.client.get< X[] >(this.baseUrl, {observe: 'response'})
         .pipe( map( this.arrayFromServer.bind(this) ) );
     }
+    
+    public queryActive(): Observable< HttpResponse< X[] > > {
+        return this.client.get< X[] >(`${this.baseUrl}/active`, {observe: 'response'})
+        .pipe( map( this.arrayFromServer.bind(this) ) );
+    }
 
     public delete(id: string): Observable<HttpResponse<any>> {
         return this.client.delete<any>(`${this.baseUrl}/${id}`, {observe: 'response'});

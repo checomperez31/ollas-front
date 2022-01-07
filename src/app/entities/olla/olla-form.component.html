@@ -9,11 +9,18 @@
                 <textarea matInput type="text" placeholder="Información de la olla" required></textarea>
             </mat-form-field>
         </div>
-        <div class="c20">
-            <button mat-flat-button (click)="openSelector()">
-                abrir modal
-            </button>
-            Aqui se va a poner el selector de tipos
+        <div class="c-20">
+            <div class="w-100 border rounded pointer p-2 text-center" *ngIf="entity.type; else noType">
+                {{entity.type.description}}
+            </div>
+            <ng-template #noType>
+                <div class="w-100 border rounded pointer p-2 text-center" (click)="openSelector()">
+                    No se ha seleccionado un tipo de olla haz clic aqui para seleccionar uno
+                </div>
+            </ng-template>
+        </div>
+        <div class="c-20">
+            <app-decorado-multiple-selector></app-decorado-multiple-selector>
         </div>
     </div>
 </div>
