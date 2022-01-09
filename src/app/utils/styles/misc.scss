@@ -1,3 +1,6 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
 .pointer {
     cursor: pointer;
 }
@@ -5,6 +8,12 @@
 .border {
     border-width: 1px;
     border-style: solid;
+    border-color: #6e6e6e;
+    border-radius: 5px;
+    box-sizing: border-box;
+    &:hover {
+        border-color: #ffffff;
+    }
 }
 
 .text-center {
@@ -12,3 +21,22 @@
 }
 
 /* internal-light-dark */
+
+@mixin color($theme) {
+    $color-config:    mat.get-color-config($theme);
+    // Get the primary color palette from the color-config.
+    $primary-palette: map.get($color-config, 'primary');
+    .border {
+        &:active {
+            border-color: mat.get-color-from-palette($primary-palette, 500);
+        }
+    }
+}
+
+
+@mixin theme($theme) {
+    $color-config: mat.get-color-config($theme);
+    @if $color-config != null {
+        @include color($theme);
+    }
+}

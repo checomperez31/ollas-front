@@ -7,6 +7,9 @@ import { RouterModule } from '@angular/router';
             {
                 path: 'ollas',
                 loadChildren: () => import('./olla/olla.module').then(m => m.OllaModule)
+            }, {
+                path: 'decorado',
+                loadChildren: () => import('./decorado/decorado.module').then(m => m.DecoradoModule)
             }
         ])
     ]
