@@ -1,0 +1,22 @@
+<form #form="ngForm" (ngSubmit)="save()">
+    <div mat-dialog-title>
+        Decorado
+    </div>
+    <div mat-dialog-content>
+        <div class="row">
+            <div class="c-20">
+                <mat-form-field appearance="outline">
+                    <mat-label>Descripción</mat-label>
+                    <input matInput name="description" [(ngModel)]="entity.description" />
+                </mat-form-field>
+            </div>
+            <div class="c-20">
+                <app-file-inline-selector></app-file-inline-selector>
+            </div>
+        </div>
+    </div>
+    <div mat-dialog-actions align="end">
+        <button type="button" mat-button (click)="close()">Cerrar</button>
+        <button type="submit" mat-button>Guardar</button>
+    </div>
+</form>

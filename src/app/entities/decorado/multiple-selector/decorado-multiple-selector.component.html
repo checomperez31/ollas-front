@@ -1,5 +1,7 @@
-<div class="row">
-    <div class="pointer c-1" *ngFor="let decorado of entities">
-        {{decorado.description}}
+<div class="d-flex">
+    <div class="pointer mr-1" *ngFor="let decorado of entities">
+        <div class="w-100 border rounded p-2">
+            {{decorado.description}}
+        </div>
     </div>
 </div>

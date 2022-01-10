@@ -23,7 +23,7 @@ export class HttpService<X> {
         .pipe( map( this.entityFromServer.bind( this ) ) );
     }
 
-    public queryOne(id: string): Observable<HttpResponse<X>> {
+    public queryOne(id: any): Observable<HttpResponse<X>> {
         return this.client.get< X >(`${this.baseUrl}/${id}`, { observe: 'response' })
         .pipe( map( this.entityFromServer.bind( this ) ) );
     }
