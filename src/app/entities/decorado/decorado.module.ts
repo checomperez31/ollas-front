@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
 import { AppSharedModule } from '../../app-shared.module';
 import { Routes, RouterModule } from '@angular/router';
 import { DecoradoListComponent } from './decorado-list.component';
@@ -27,6 +27,7 @@ const routes: Routes = [
         FileModule
     ],
     declarations: [ DecoradoListComponent, DecoradoFormComponent ],
-    providers: [ DecoradoService, DecoradoDialogService ]
+    providers: [ DecoradoService, DecoradoDialogService ],
+    schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class DecoradoModule {}

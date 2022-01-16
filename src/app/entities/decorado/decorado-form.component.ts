@@ -11,6 +11,7 @@ import { HttpResponse } from '@angular/common/http';
 export class DecoradoFormComponent {
 
     entity: Decorado = new Decorado();
+    fileId?: string;
 
     constructor(
         private dialog: MatDialogRef<DecoradoFormComponent>,
