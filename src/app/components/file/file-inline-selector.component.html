@@ -1,9 +1,12 @@
 <!-- <input class="custom-file-input" type="file" id="file_foto" (change)="handleData($event.target.files)"
                [attr.accept]="typesString" #inputFile [hidden]="true" multiple/> -->
 <div class="file-container border rounded p-1" (click)="selectFile()">
+    <div class="img-container" *ngIf="file && file.file">
+        <img [alt]="file.fileName" [src]="getImgSrc()">
+    </div>
     <div class="text-container">
         <span *ngIf="!file">No se ha seleccionado un archivo</span>
-        <span *ngIf="file">{{file.fileName}} - {{loading}}</span>
+        <span *ngIf="file">{{file.fileName}}</span>
     </div>
 </div>
 <input #fileInput hidden type="file" multiple="false" (change)="handleFile($event)" [attr.accept]="getFileTypes()">

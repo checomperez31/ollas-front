@@ -1,8 +1,10 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
 import { Decorado } from './decorado.model';
 import { DecoradoService } from './decorado.service';
 import { HttpResponse } from '@angular/common/http';
+import { FileInlineSelectorComponent } from '../../components/file/file-inline-selector.component';
+import { MessageService } from '../../utils/message.service';
 
 @Component({
     selector: 'app-decorado-form',
@@ -11,11 +13,13 @@ import { HttpResponse } from '@angular/common/http';
 export class DecoradoFormComponent {
 
     entity: Decorado = new Decorado();
-    fileId?: string;
+    saving = false;
+    @ViewChild('file') file?: FileInlineSelectorComponent;
 
     constructor(
         private dialog: MatDialogRef<DecoradoFormComponent>,
-        private entityService: DecoradoService
+        private entityService: DecoradoService,
+        private messageService: MessageService
     ) {}
 
     loadEntity(id: number) {
@@ -31,14 +35,24 @@ export class DecoradoFormComponent {
     }
 
     save(): void {
+        this.saving = true;
         if ( this.entity.id ) {
-            this.entityService.update( this.entity ).subscribe( this.successSaving.bind(this) );
+            this.entityService.update( this.entity ).subscribe({
+                next: this.successSaving.bind(this),
+                error: () => this.saving = false
+            });
         } else {
-            this.entityService.create( this.entity ).subscribe( this.successSaving.bind(this) );
+            this.entityService.create( this.entity ).subscribe({
+                next: this.successSaving.bind(this),
+                error: () => this.saving = false
+            });
         }
     }
 
     successSaving(): void {
+        if ( this.file ) this.file.saved = true;
+        this.saving = false;
+        this.messageService.emit('decorado');
         this.close();
     }
 }

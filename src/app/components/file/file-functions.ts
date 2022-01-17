@@ -1,6 +1,7 @@
 import { HttpResponse } from "@angular/common/http";
-import { Component, ElementRef, Injectable, Input, ViewChild } from "@angular/core";
+import { Component, ElementRef, Injectable, Input, OnDestroy, ViewChild } from "@angular/core";
 import { AbstractControl, ControlValueAccessor, ValidationErrors, ValidatorFn } from "@angular/forms";
+import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
 import { FileData } from "./file-data.model";
 import { imagesTypes } from "./file-types";
 import { FileService } from "./file.service";
@@ -8,29 +9,58 @@ import { FileService } from "./file.service";
 @Component({
     template: ''
 })
-export abstract class FileFunctions implements ControlValueAccessor {
+export abstract class FileFunctions implements OnDestroy, ControlValueAccessor {
+    @Input() endpoint = 'file';
     @ViewChild('fileInput') fileInput: ElementRef;
     fileTypes?: string[];
     file?: FileData;
     id?: string;
+    lastIdSaved?: string;
+    idsToDelete: string[] = [];
     disabled = false;
     loading = false;
+    saved = false;
 
     constructor(
-        protected service: FileService
+        protected service: FileService,
+        protected sanitizer: DomSanitizer
     ) {}
+
+    ngOnDestroy(): void {
+        this.removeActualFile(true);
+        const prom: Promise<any>[] = this.idsToDelete.map(id => this.service.delete(this.endpoint, id).toPromise());
+        Promise.all(prom).then(() => {});
+    }
 
     onChange = (_:any) => {}
     onTouch = () => {}
 
     writeValue(value: any): void {
         if (value && value !== '') {
-            console.log('Se van a cargar datos');
+            this.loading = true;
+            this.onChange(this.id);
+            this.service.findOne(this.endpoint, value).subscribe({
+                next: (res) => {
+                    if (res) {
+                        this.file = res.body;
+                        this.id = this.file.id;
+                        this.saved = true;
+                    }
+                    this.loading = false;
+                    this.onChange(this.id);
+                },
+                error: () => {
+                    this.loading = false;
+                    this.onChange(this.id);
+                }
+            });
         }
     }
+    
     registerOnChange(fn: any): void {
         this.onChange = fn;
     }
+
     registerOnTouched(fn: any): void {
         this.onTouch = fn;
     }
@@ -40,7 +70,6 @@ export abstract class FileFunctions implements ControlValueAccessor {
     }
 
     handleFile(value: Event): void {
-        console.log( value );
         const element = event.target as HTMLInputElement;
         let files: FileList | null = element.files;
         if( files ) {
@@ -58,7 +87,7 @@ export abstract class FileFunctions implements ControlValueAccessor {
         this.loading = true;
         this.onChange(undefined);
         this.file = new FileData(undefined, undefined, file.type, file.name);
-        this.service.create( 'decorado-file', file, 'hola' ).subscribe({
+        this.service.create( this.endpoint, file, 'hola' ).subscribe({
             next: this.successUploadData.bind( this ),
             error: () => {
                 this.loading = false;
@@ -67,9 +96,27 @@ export abstract class FileFunctions implements ControlValueAccessor {
         });
     }
 
+    removeActualFile(destroy: boolean): void {
+        if ( this.id && !this.idsToDelete.includes( this.id ) ) {
+            if ( this.saved ) {
+                if ( destroy ) {
+                    if ( this.lastIdSaved ) this.idsToDelete.push( this.lastIdSaved );
+                } else {
+                    this.lastIdSaved = this.id;
+                    this.saved = false;
+                }
+            } else {
+                this.idsToDelete.push( this.id );
+            }
+        }
+    }
+
     successUploadData(res: HttpResponse<FileData>): void {
-        this.file = res.body || undefined;
-        this.id = this.file.id;
+        this.removeActualFile(false);
+        if (res.body) {
+            this.file = res.body;
+            this.id = this.file.id;
+        }
         this.loading = false;
         this.onChange(this.id);
     }
@@ -96,8 +143,8 @@ export abstract class FileFunctions implements ControlValueAccessor {
     }
 
     selectFile(): void {
-        console.log(this.fileInput);
-        if ( this.fileInput ) {
+        if ( this.fileInput && !this.loading ) {
+            this.onTouch();
             this.fileInput.nativeElement.click();
         }
     }
@@ -106,5 +153,10 @@ export abstract class FileFunctions implements ControlValueAccessor {
         return this.loading ? {
             uploading: true
         } : null;
+    }
+
+    getImgSrc(): SafeUrl {
+        if ( this.file && this.file.file ) return this.sanitizer.bypassSecurityTrustUrl(`data:${this.file.fileType};base64,${this.file.file}`);
+        return null;
     }
 }

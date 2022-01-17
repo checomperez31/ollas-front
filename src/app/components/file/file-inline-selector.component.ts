@@ -1,9 +1,8 @@
 import { Component, forwardRef } from "@angular/core";
-import { FileService } from "./file.service";
-import { HttpResponse } from '@angular/common/http';
-import { FileData } from "./file-data.model";
-import { FileFunctions } from './file-functions';
 import { NG_VALIDATORS, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { FileFunctions } from './file-functions';
+import { FileService } from "./file.service";
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-file-inline-selector',
@@ -23,10 +22,10 @@ import { NG_VALIDATORS, NG_VALUE_ACCESSOR } from "@angular/forms";
     ]
 })
 export class FileInlineSelectorComponent extends FileFunctions {
-
     constructor(
-        protected service: FileService
+        protected service: FileService,
+        protected sanitizer: DomSanitizer
     ) {
-        super(service);
+        super(service, sanitizer);
     }
 }

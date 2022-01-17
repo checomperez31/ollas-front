@@ -7,15 +7,17 @@
             <div class="c-20">
                 <mat-form-field appearance="outline">
                     <mat-label>Descripción</mat-label>
-                    <input matInput name="description" [(ngModel)]="entity.description" />
+                    <input matInput name="description" [(ngModel)]="entity.description" required/>
                 </mat-form-field>
             </div>
             <div class="c-20">
-                <app-file-inline-selector name="file" images [(ngModel)]="fileId" required></app-file-inline-selector>
-                <div>
-                    {{fileId}}
-                    <span *ngIf="form.controls?.file?.errors">
-                        {{form.controls.file.errors | json}}
+                <app-file-inline-selector #file name="file" images [(ngModel)]="entity.file" endpoint="decorado-file"></app-file-inline-selector>
+                <div *ngIf="form.controls?.file?.touched && form.controls?.file?.invalid">
+                    <span *ngIf="form.controls?.file?.errors?.required">
+                        El archivo es requerido
+                    </span>
+                    <span *ngIf="form.controls?.file?.errors?.uploading">
+                        El archivo se esta subiendo
                     </span>
                 </div>
             </div>
@@ -23,6 +25,6 @@
     </div>
     <div mat-dialog-actions align="end">
         <button type="button" mat-button (click)="close()">Cerrar</button>
-        <button type="submit" mat-button>Guardar</button>
+        <button type="submit" mat-button [disabled]="form.invalid || saving">Guardar</button>
     </div>
 </form>

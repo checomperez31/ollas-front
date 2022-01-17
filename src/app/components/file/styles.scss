@@ -1,6 +1,21 @@
 .file-container {
     cursor: pointer;
+    display: flex;
+    .img-container {
+        width: 40px;
+        height: 40px;
+        overflow: hidden;
+        img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+    }
     .text-container {
-        text-align: center;
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        padding: 5px 10px;
+        box-sizing: border-box;
     }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { observable, Observable } from "rxjs";
 import { HttpResponse, HttpClient } from '@angular/common/http';
 import { FileData } from "./file-data.model";
 import { SERVER_URL } from "src/app/app.constants";
@@ -15,9 +15,17 @@ export class FileService {
     create(url: string, file: File, nombre: string): Observable<HttpResponse<FileData>> {
         const formData: FormData = new FormData();
         formData.append('file', file);
-        // formData.append('name', nombre);
         return this.client.post<FileData>(`${SERVER_URL}/api/${url}`, formData, { observe: 'response' })
             .pipe(map((res: HttpResponse<FileData>) => this.entityFromServer(res)));
+    }
+
+    findOne(url: string, id: any): Observable<HttpResponse<FileData>> {
+        return this.client.get<FileData>(`${SERVER_URL}/api/${url}/${id}`, {observe: 'response'})
+            .pipe(map((res: HttpResponse<FileData>) => this.entityFromServer(res)));
+    }
+
+    delete(url: string, id: any): Observable<HttpResponse<any>> {
+        return this.client.delete(`${SERVER_URL}/api/${url}/${id}`, {observe: 'response'});
     }
 
     protected entityFromServer(res: HttpResponse<FileData>): HttpResponse<FileData> {
