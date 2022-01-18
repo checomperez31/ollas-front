@@ -1,4 +1,4 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { SERVER_URL } from '../app.constants';
@@ -28,8 +28,9 @@ export class HttpService<X> {
         .pipe( map( this.entityFromServer.bind( this ) ) );
     }
 
-    public query(): Observable< HttpResponse< X[] > > {
-        return this.client.get< X[] >(this.baseUrl, {observe: 'response'})
+    public query(params?: any): Observable< HttpResponse< X[] > > {
+        const copy = this.processParams( params );
+        return this.client.get< X[] >(this.baseUrl, {params: copy, observe: 'response'})
         .pipe( map( this.arrayFromServer.bind(this) ) );
     }
     
@@ -43,7 +44,7 @@ export class HttpService<X> {
     }
 
     protected arrayFromServer(res: HttpResponse<X[]>): HttpResponse<X[]> {
-        let body: X[] | null = null;
+        let body: X[] = [];
         if ( res.body ) body = res.body.map( this.cloneEntityFromServer.bind( this ) );
         return res.clone( {body} );
     }
@@ -56,5 +57,15 @@ export class HttpService<X> {
 
     public cloneEntityFromServer(entity: any): X {
         return Object.assign( {}, entity );
+    }
+
+    processParams(params?: any): HttpParams {
+        let opts = new HttpParams();
+        if ( !params ) params = {};
+        if ( !params.size ) params.size = 5;
+        Object.keys( params ).forEach(k => {
+            opts = opts.set( k, params[ k ] );
+        });
+        return opts;
     }
 }

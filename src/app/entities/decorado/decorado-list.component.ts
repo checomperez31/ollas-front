@@ -4,12 +4,13 @@ import { DecoradoService } from './decorado.service';
 import { HttpResponse } from '@angular/common/http';
 import { Decorado } from "./decorado.model";
 import { MessageService } from '../../utils/message.service';
+import { ListFunctions } from '../../utils/list-functions';
 
 @Component({
     selector: 'app-decorado-list',
     templateUrl: 'decorado-list.component.html'
 })
-export class DecoradoListComponent implements OnInit {
+export class DecoradoListComponent extends ListFunctions implements OnInit {
 
     entities: Decorado[] = [];
     columnsToDisplay = ['id', 'description', 'actions'];
@@ -18,7 +19,9 @@ export class DecoradoListComponent implements OnInit {
         private entityService: DecoradoService,
         private dialogService: DecoradoDialogService,
         private messageService: MessageService
-    ) {}
+    ) {
+        super();
+    }
 
     ngOnInit(): void {
         this.subscribeToChanges();
@@ -26,10 +29,11 @@ export class DecoradoListComponent implements OnInit {
     }
 
     loadAll(): void {
-        this.entityService.query().subscribe( this.successLoadAll.bind( this ) );
+        this.entityService.query( this.getRequestParams() ).subscribe( this.successLoadAll.bind( this ) );
     }
 
     successLoadAll(res: HttpResponse<Decorado[]>): void {
+        super.successLoadAll(res);
         this.entities = res.body || [];
     }
 

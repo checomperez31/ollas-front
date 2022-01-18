@@ -32,6 +32,7 @@
                 <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
                 <tr mat-row *matRowDef="let data; columns: columnsToDisplay"></tr>
             </table>
+            <mat-paginator [pageSize]="elementsPerPage" [length]="totalElements" (page)="loadPage($event)"></mat-paginator>
         </div>
     </div>
 </div>
