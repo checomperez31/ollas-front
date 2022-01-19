@@ -4,9 +4,11 @@ import {MatInputModule} from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from "@angular/common";
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
+        FormsModule,
         CommonModule,
         MatButtonModule,
         MatInputModule,
@@ -14,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
         HttpClientModule
     ],
     exports: [
+        FormsModule,
         CommonModule,
         MatButtonModule,
         MatInputModule,

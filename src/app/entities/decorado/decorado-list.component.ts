@@ -29,12 +29,17 @@ export class DecoradoListComponent extends ListFunctions implements OnInit {
     }
 
     loadAll(): void {
-        this.entityService.query( this.getRequestParams() ).subscribe( this.successLoadAll.bind( this ) );
+        this.loading = true;
+        this.entityService.query( this.getRequestParams() ).subscribe({
+            next: this.successLoadAll.bind( this ),
+            error: () => this.loading = false
+        });
     }
 
     successLoadAll(res: HttpResponse<Decorado[]>): void {
         super.successLoadAll(res);
         this.entities = res.body || [];
+        this.loading = false;
     }
 
     open(id?: number): void {

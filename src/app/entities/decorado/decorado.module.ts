@@ -10,6 +10,8 @@ import { FormsModule } from "@angular/forms";
 import { MatTableModule } from '@angular/material/table';
 import { FileModule } from '../../components/file/file.module';
 import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatSortModule } from "@angular/material/sort";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
 
 const routes: Routes = [
     {
@@ -25,7 +27,9 @@ const routes: Routes = [
         RouterModule.forChild( routes ),
         MatDialogModule,
         MatTableModule,
+        MatSortModule,
         MatPaginatorModule,
+        MatProgressBarModule,
         FileModule
     ],
     declarations: [ DecoradoListComponent, DecoradoFormComponent ],

@@ -6,7 +6,7 @@
         <div class="c-20">
             <mat-form-field appearance="outline">
                 <mat-label>Descripción</mat-label>
-                <textarea matInput type="text" placeholder="Información de la olla" required></textarea>
+                <textarea matInput type="text" placeholder="Información de la olla" [(ngModel)]="entity.description" required></textarea>
             </mat-form-field>
         </div>
         <div class="c-20">
@@ -25,7 +25,10 @@
                     Seleccione los decorados
                 </div>
                 <div class="c-12">
-                    <app-decorado-multiple-selector></app-decorado-multiple-selector>
+                    <app-decorado-multiple-selector name="decorado" [(ngModel)]="decoradoIds"></app-decorado-multiple-selector>
+                </div>
+                <div class="c-20">
+                    Decorados {{decoradoIds | json}}
                 </div>
             </div>
         </div>

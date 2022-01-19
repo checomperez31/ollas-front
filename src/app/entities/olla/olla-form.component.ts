@@ -10,16 +10,17 @@ import { Olla } from './olla.model';
 export class OllaFormComponent {
 
     entity: Olla = new Olla();
+    decoradoIds: number[] = [];
 
     constructor(
         private tipoSelectorDialogService: TipoSelectorDialogService
     ) {}
 
     openSelector(): void {
+        console.log( this.decoradoIds );
         this.tipoSelectorDialogService.open().afterClosed().subscribe(value => {
             console.log(value instanceof Tipo);
             if (value && value instanceof Tipo) {
-                console.log( value );
                 this.entity.type = value;
             }
         });

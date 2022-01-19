@@ -7,11 +7,14 @@ export class ListFunctions {
     elementsPerPage = 5;
     totalElements?: number;
     page = 0;
+    sorts: string[] = [];
+    loading = false;
 
     getRequestParams(): any {
         return {
             page: this.page,
-            size: this.elementsPerPage
+            size: this.elementsPerPage,
+            sort: this.sorts
         };
     }
 
@@ -26,7 +29,18 @@ export class ListFunctions {
         if (page.pageIndex != undefined && page.pageIndex != null) {
             this.page = page.pageIndex;
         }
-        console.log( this.page );
         this.loadAll();
+    }
+
+    sortElements(value: any) {
+        if (value && value.active) {
+            const index = this.sorts.findIndex(s => s.includes(value.active));
+            this.sorts.splice(index, 1);
+            if ( value.direction ) {
+                const sortString = value.active + ',' + value.direction;
+                this.sorts.push( sortString );
+            }
+            this.loadAll();
+        }
     }
 }

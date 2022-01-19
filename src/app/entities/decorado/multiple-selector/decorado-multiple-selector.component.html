@@ -1,6 +1,6 @@
-<div class="d-flex">
-    <div class="pointer mr-1" *ngFor="let decorado of entities">
-        <div class="w-100 border rounded p-2">
+<div class="d-flex flex-row flex-wrap">
+    <div class="pointer mr-1 mb-1" *ngFor="let decorado of entities">
+        <div class="w-100 border rounded p-2" [ngClass]="{'active': idsSelected.includes(decorado.id)}" (click)="selectEntity( decorado )">
             {{decorado.description}}
         </div>
     </div>
