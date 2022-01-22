@@ -1,21 +1,31 @@
 <div class="container">
-    <div class="row">
+    <div class="row mt-2">
         <div class="c-20">
-            <h3>Listado de ollas</h3>
-            <button mat-flat-button [routerLink]="['create']">
-                Agregar olla
-            </button>
+            <h3>
+                Listado de ollas
+                <button class="float-right" mat-flat-button [routerLink]="['create']">
+                    Agregar olla
+                </button>
+            </h3>
         </div>
-        <div class="c-20">
-            <table mat-table [dataSource]="entities">
-                <ng-container matColumnDef="id">
-                    <th mat-header-cell *matHeaderCellDef>ID</th>
-                    <td mat-cell *matCellDef="let olla">{{olla.id}}</td>
+        <div class="c-20 mt-1">
+            <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+            <table class="w-100" mat-table [dataSource]="entities" matSort (matSortChange)="sortElements($event)">
+                <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef>Descripción</th>
+                    <td mat-cell *matCellDef="let olla">{{olla.description}}</td>
+                </ng-container>
+                <ng-container matColumnDef="type">
+                    <th mat-header-cell *matHeaderCellDef>Tipo de olla</th>
+                    <td mat-cell *matCellDef="let olla">
+                        {{olla.type.description}}
+                    </td>
                 </ng-container>
                 <!-- <mat-text-column name="id" headerText="Hola k ase"></mat-text-column> -->
                 <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
                 <tr mat-row *matRowDef="let data; columns: columnsToDisplay"></tr>
             </table>
+            <mat-paginator [pageSize]="elementsPerPage" [length]="totalElements" (page)="loadPage($event)"></mat-paginator>
         </div>
     </div>
 </div>

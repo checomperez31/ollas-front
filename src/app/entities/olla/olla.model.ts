@@ -1,3 +1,4 @@
+import { OllaDecorado } from "../olla-decorado/olla-decorado.model";
 import { Tipo } from "../tipo/tipo.model";
 
 export class Olla {
@@ -6,5 +7,6 @@ export class Olla {
         public description?: string,
         public status?: string,
         public type?: Tipo,
+        public decorados?: OllaDecorado[]
     ) {}
 }

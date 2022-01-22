@@ -8,6 +8,10 @@ import { AppSharedModule } from '../../app-shared.module';
 import { OllaFormComponent } from './olla-form.component';
 import { TipoSelectorModule } from '../tipo/selector/tipo-selector.module';
 import { DecoradoMultipleSelectorModule } from '../decorado/multiple-selector/decorado-multiple-selector.module';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { FileModule } from "src/app/components/file/file.module";
 
 const routes: Routes = [
     {
@@ -25,9 +29,13 @@ const routes: Routes = [
         AppSharedModule,
         RouterModule.forChild( routes ),
         HttpClientModule,
-        MatTableModule,
+        DecoradoMultipleSelectorModule,
         TipoSelectorModule,
-        DecoradoMultipleSelectorModule
+        FileModule,
+        MatTableModule,
+        MatProgressBarModule,
+        MatPaginatorModule,
+        MatSortModule
     ],
     declarations: [ OllaList, OllaFormComponent ],
     providers: [ OllaService ],
