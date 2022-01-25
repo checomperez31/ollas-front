@@ -8,10 +8,10 @@ import { DecoradoFormComponent } from './decorado-form.component';
 import { DecoradoService } from './decorado.service';
 import { FormsModule } from "@angular/forms";
 import { MatTableModule } from '@angular/material/table';
-import { FileModule } from '../../components/file/file.module';
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatSortModule } from "@angular/material/sort";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { FileInlineSelectorModule } from '../../components/file/file-inline/file-inline.module';
 
 const routes: Routes = [
     {
@@ -30,7 +30,7 @@ const routes: Routes = [
         MatSortModule,
         MatPaginatorModule,
         MatProgressBarModule,
-        FileModule
+        FileInlineSelectorModule
     ],
     declarations: [ DecoradoListComponent, DecoradoFormComponent ],
     providers: [ DecoradoService, DecoradoDialogService ],

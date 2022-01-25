@@ -1,9 +1,9 @@
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from "@angular/core";
-import { observable, Observable } from "rxjs";
-import { HttpResponse, HttpClient } from '@angular/common/http';
-import { FileData } from "./file-data.model";
-import { SERVER_URL } from "src/app/app.constants";
+import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
+import { SERVER_URL } from "src/app/app.constants";
+import { FileData } from "./file-data.model";
 
 @Injectable()
 export class FileService {

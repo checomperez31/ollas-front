@@ -3,8 +3,8 @@ import { MatDialogRef } from "@angular/material/dialog";
 import { Decorado } from './decorado.model';
 import { DecoradoService } from './decorado.service';
 import { HttpResponse } from '@angular/common/http';
-import { FileInlineSelectorComponent } from '../../components/file/file-inline-selector.component';
 import { MessageService } from '../../utils/message.service';
+import { FileInlineSelectorComponent } from "src/app/components/file/file-inline/file-inline-selector.component";
 
 @Component({
     selector: 'app-decorado-form',

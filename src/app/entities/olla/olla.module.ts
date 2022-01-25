@@ -11,7 +11,7 @@ import { DecoradoMultipleSelectorModule } from '../decorado/multiple-selector/de
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { FileModule } from "src/app/components/file/file.module";
+import { FileInlineSelectorModule } from '../../components/file/file-inline/file-inline.module';
 
 const routes: Routes = [
     {
@@ -20,6 +20,10 @@ const routes: Routes = [
     },
     {
         path: 'create',
+        component: OllaFormComponent
+    },
+    {
+        path: 'edit/:id',
         component: OllaFormComponent
     }
 ];
@@ -31,7 +35,7 @@ const routes: Routes = [
         HttpClientModule,
         DecoradoMultipleSelectorModule,
         TipoSelectorModule,
-        FileModule,
+        FileInlineSelectorModule,
         MatTableModule,
         MatProgressBarModule,
         MatPaginatorModule,

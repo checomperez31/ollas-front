@@ -7,6 +7,7 @@ export class Olla {
         public description?: string,
         public status?: string,
         public type?: Tipo,
-        public decorados?: OllaDecorado[]
+        public decorados?: OllaDecorado[],
+        public photo?: string
     ) {}
 }

@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="c-12">
-                <app-file-inline-selector endpoint="olla-file"></app-file-inline-selector>
+                <app-file-inline-selector name="photo" endpoint="olla-file" [(ngModel)]="entity.photo" #photo></app-file-inline-selector>
             </div>
             <div class="c-20 text-right">
                 <button mat-flat-button>

@@ -1,0 +1,3 @@
+<div class="photo-container" [ngClass]="{'rounded': borderType === 'rounded', 'circle': borderType === 'circle'}" [style.width.px]="size" [style.height.px]="size">
+    <img [src]="getImgSrc()">
+</div>

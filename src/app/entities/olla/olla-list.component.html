@@ -21,6 +21,14 @@
                         {{olla.type.description}}
                     </td>
                 </ng-container>
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                    <td mat-cell *matCellDef="let entity">
+                        <button mat-flat-button [routerLink]="['edit', entity.id]">
+                            Editar
+                        </button>
+                    </td>
+                </ng-container>
                 <!-- <mat-text-column name="id" headerText="Hola k ase"></mat-text-column> -->
                 <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
                 <tr mat-row *matRowDef="let data; columns: columnsToDisplay"></tr>

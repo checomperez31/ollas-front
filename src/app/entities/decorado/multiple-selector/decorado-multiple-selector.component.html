@@ -1,7 +1,12 @@
 <div class="d-flex flex-row flex-wrap">
     <div class="pointer mr-1 mb-1" *ngFor="let decorado of entities">
-        <div class="w-100 border rounded p-2" [ngClass]="{'active': idsSelected.includes(decorado.id)}" (click)="selectEntity( decorado )">
-            {{decorado.description}}
+        <div class="w-100 border rounded p-2 d-flex align-items-center" [ngClass]="{'active': idsSelected.includes(decorado.id)}" (click)="selectEntity( decorado )">
+            <div class="img-container" *ngIf="decorado.file">
+                <app-photo-viewer [id]="decorado.file" endpoint="decorado-file" [size]="48"></app-photo-viewer>
+            </div>
+            <div class="description-container">
+                &nbsp;{{decorado.description}}
+            </div>
         </div>
     </div>
 </div>

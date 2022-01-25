@@ -10,7 +10,7 @@ import { ListFunctions } from '../../utils/list-functions';
 })
 export class OllaList extends ListFunctions implements OnInit {
     entities: Olla[] = [];
-    columnsToDisplay = ['description', 'type'];
+    columnsToDisplay = ['description', 'type', 'actions'];
 
     constructor(
         private entityService: OllaService

@@ -2,14 +2,14 @@ import { Olla } from '../olla/olla.model';
 
 export class OllaDecorado {
     constructor(
-        private id?: OllaDecoradoId,
-        private olla?: Olla
+        public id?: OllaDecoradoId,
+        public olla?: Olla
     ) {}
 }
 
 export class OllaDecoradoId {
     constructor(
-        private ollaId?: string,
-        private decoradoId?: number,
+        public ollaId?: string,
+        public decoradoId?: number,
     ) {}
 }
