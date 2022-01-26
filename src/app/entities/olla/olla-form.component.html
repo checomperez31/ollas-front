@@ -1,6 +1,6 @@
 <div class="container">
     <form (ngSubmit)="save()">
-        <div class="row">
+        <div class="row mt-2">
             <div class="c-20">
                 <h3>Creación de olla</h3>
             </div>
@@ -10,28 +10,38 @@
                     <textarea matInput type="text" name="description" placeholder="Información de la olla" [(ngModel)]="entity.description" required></textarea>
                 </mat-form-field>
             </div>
-            <div class="c-20">
-                <div class="w-100 border rounded pointer p-2 text-center" *ngIf="entity.type; else noType">
-                    {{entity.type.description}}
-                </div>
-                <ng-template #noType>
-                    <div class="w-100 border rounded pointer p-2 text-center" (click)="openSelector()">
-                        No se ha seleccionado un tipo de olla haz clic aqui para seleccionar uno
-                    </div>
-                </ng-template>
-            </div>
-            <div class="c-20 mt-1">
+            <div class="c-8">
                 <div class="row">
                     <div class="c-20">
-                        Seleccione los decorados
+                        Seleccione el tipo de olla
                     </div>
-                    <div class="c-12">
-                        <app-decorado-multiple-selector name="decorado" [(ngModel)]="decoradoIds"></app-decorado-multiple-selector>
+                    <div class="c-20">
+                        <div class="w-100 border rounded pointer p-2 text-center" *ngIf="entity.type; else noType">
+                            {{entity.type.description}}
+                        </div>
+                        <ng-template #noType>
+                            <div class="w-100 border rounded pointer p-2 text-center" (click)="openSelector()">
+                                No se ha seleccionado un tipo de olla haz clic aqui para seleccionar uno
+                            </div>
+                        </ng-template>
+                    </div>
+                    <div class="c-20 mt-1">
+                        Seleccione un archivo
+                    </div>
+                    <div class="c-20">
+                        <app-file-inline-selector name="photo" endpoint="olla-file" [(ngModel)]="entity.photo" #photo inline="false"></app-file-inline-selector>
                     </div>
                 </div>
             </div>
             <div class="c-12">
-                <app-file-inline-selector name="photo" endpoint="olla-file" [(ngModel)]="entity.photo" #photo></app-file-inline-selector>
+                <div class="row">
+                    <div class="c-20">
+                        Seleccione los decorados
+                    </div>
+                    <div class="c-20">
+                        <app-decorado-multiple-selector name="decorado" [(ngModel)]="decoradoIds"></app-decorado-multiple-selector>
+                    </div>
+                </div>
             </div>
             <div class="c-20 text-right">
                 <button mat-flat-button>

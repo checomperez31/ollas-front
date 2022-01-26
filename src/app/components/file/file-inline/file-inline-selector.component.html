@@ -1,7 +1,8 @@
 <!-- <input class="custom-file-input" type="file" id="file_foto" (change)="handleData($event.target.files)"
                [attr.accept]="typesString" #inputFile [hidden]="true" multiple/> -->
-<div class="file-container border rounded p-1" (click)="selectFile()">
-    <div class="img-container" *ngIf="file && file.file">
+<div class="file-container border rounded p-1" [ngClass]="{'flex-column': !inline, 'flex-row': inline}"
+    (click)="selectFile()">
+    <div class="img-container" [ngClass]="{'big-image': !inline}" *ngIf="file && file.file">
         <img [alt]="file.fileName" [src]="getImgSrc()">
     </div>
     <div class="text-container">

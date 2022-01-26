@@ -10,6 +10,9 @@ import { RouterModule } from '@angular/router';
             }, {
                 path: 'decorado',
                 loadChildren: () => import('./decorado/decorado.module').then(m => m.DecoradoModule)
+            }, {
+                path: 'tipo',
+                loadChildren: () => import('./tipo/tipo.module').then(m => m.TipoModule)
             }
         ])
     ]

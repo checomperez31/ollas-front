@@ -1,4 +1,4 @@
-import { Component, forwardRef } from "@angular/core";
+import { Component, forwardRef, Input } from '@angular/core';
 import { NG_VALIDATORS, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { DomSanitizer } from '@angular/platform-browser';
 import { FileFunctions } from "../file-functions";
@@ -22,10 +22,22 @@ import { FileService } from "../file.service";
     ]
 })
 export class FileInlineSelectorComponent extends FileFunctions {
+
+    private _inline = true;
+
     constructor(
         protected service: FileService,
         protected sanitizer: DomSanitizer
     ) {
         super(service, sanitizer);
+    }
+
+    get inline(): boolean {
+        return this._inline;
+    }
+
+    @Input()
+    set inline(value: any) {
+        this._inline = this.validateInputBooleanValue( value );
     }
 }

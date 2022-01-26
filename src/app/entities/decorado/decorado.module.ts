@@ -22,14 +22,9 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
-        FormsModule,
         AppSharedModule,
         RouterModule.forChild( routes ),
         MatDialogModule,
-        MatTableModule,
-        MatSortModule,
-        MatPaginatorModule,
-        MatProgressBarModule,
         FileInlineSelectorModule
     ],
     declarations: [ DecoradoListComponent, DecoradoFormComponent ],

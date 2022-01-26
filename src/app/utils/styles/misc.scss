@@ -9,12 +9,23 @@
     flex-direction: row;
 }
 
+.flex-column {
+    flex-direction: column;
+}
+
 .flex-wrap {
     flex-wrap: wrap;
 }
 
 .align-items-center {
     align-items: center;
+}
+.align-items-stretch {
+    align-items: stretch;
+}
+
+.justify-content-sb {
+    justify-content: space-between;
 }
 
 .pointer {

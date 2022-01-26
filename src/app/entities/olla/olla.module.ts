@@ -32,14 +32,9 @@ const routes: Routes = [
     imports: [
         AppSharedModule,
         RouterModule.forChild( routes ),
-        HttpClientModule,
         DecoradoMultipleSelectorModule,
         TipoSelectorModule,
-        FileInlineSelectorModule,
-        MatTableModule,
-        MatProgressBarModule,
-        MatPaginatorModule,
-        MatSortModule
+        FileInlineSelectorModule
     ],
     declarations: [ OllaList, OllaFormComponent ],
     providers: [ OllaService ],
