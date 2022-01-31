@@ -1,0 +1,30 @@
+<form #form="ngForm" (ngSubmit)="save()">
+    <div mat-dialog-title>
+        Tipo
+    </div>
+    <div mat-dialog-content>
+        <div class="row">
+            <div class="c-20">
+                <mat-form-field appearance="outline">
+                    <mat-label>Descripción</mat-label>
+                    <input matInput name="description" [(ngModel)]="entity.description" required/>
+                </mat-form-field>
+            </div>
+            <div class="c-20">
+                <app-file-inline-selector #file name="file" images [(ngModel)]="entity.fileId" endpoint="tipo-file"></app-file-inline-selector>
+                <div *ngIf="form.controls?.file?.touched && form.controls?.file?.invalid">
+                    <span *ngIf="form.controls?.file?.errors?.required">
+                        El archivo es requerido
+                    </span>
+                    <span *ngIf="form.controls?.file?.errors?.uploading">
+                        El archivo se esta subiendo
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div mat-dialog-actions align="end">
+        <button type="button" mat-button (click)="close()">Cerrar</button>
+        <button type="submit" mat-button [disabled]="form.invalid || saving">Guardar</button>
+    </div>
+</form>

@@ -4,9 +4,15 @@
     </div>
     <div mat-dialog-content>
         <mat-selection-list [multiple]="false">
-            <mat-list-option *ngFor="let tipo of entities" (click)="selectOption( tipo )">
-                <mat-icon matListIcon>folder</mat-icon>
-                <h3 matLine>{{tipo.description}}</h3>
+            <mat-list-option *ngFor="let tipo of entities" (click)="selectOption( tipo )" class="content-box py-1">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <app-photo-viewer endpoint="tipo-file" [id]="tipo.fileId" [size]="48"></app-photo-viewer>
+                    </div>
+                    <div>
+                        <h3 matLine class="mb-0 ml-1">{{tipo.description}}</h3>
+                    </div>
+                </div>
             </mat-list-option>
         </mat-selection-list>
     </div>

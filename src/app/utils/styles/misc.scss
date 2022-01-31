@@ -1,6 +1,10 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
 
+.content-box {
+    box-sizing: content-box;
+}
+
 .d-flex {
     display: flex;
 }

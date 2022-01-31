@@ -16,7 +16,7 @@
                         Seleccione el tipo de olla
                     </div>
                     <div class="c-20">
-                        <div class="w-100 border rounded pointer p-2 text-center" *ngIf="entity.type; else noType">
+                        <div class="w-100 border rounded pointer p-2 text-center" *ngIf="entity.type; else noType" (click)="openSelector()">
                             {{entity.type.description}}
                         </div>
                         <ng-template #noType>

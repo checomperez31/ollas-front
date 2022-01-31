@@ -12,6 +12,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { FileInlineSelectorModule } from '../../components/file/file-inline/file-inline.module';
+import { PhotoViewerModule } from '../../components/file/photo-viewer/photo-viewer.module';
 
 const routes: Routes = [
     {
@@ -34,6 +35,7 @@ const routes: Routes = [
         RouterModule.forChild( routes ),
         DecoradoMultipleSelectorModule,
         TipoSelectorModule,
+        PhotoViewerModule,
         FileInlineSelectorModule
     ],
     declarations: [ OllaList, OllaFormComponent ],

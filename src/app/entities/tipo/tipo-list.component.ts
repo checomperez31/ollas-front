@@ -4,6 +4,7 @@ import { ListFunctions } from '../../utils/list-functions';
 import { MessageService } from '../../utils/message.service';
 import { Tipo } from './tipo.model';
 import { TipoService } from './tipo.service';
+import { TipoDialogService } from './tipo-dialog.service';
 
 @Component({
     selector: 'app-tipo-list',
@@ -16,13 +17,15 @@ export class TipoListComponent extends ListFunctions implements OnInit {
 
     constructor(
         private entityService: TipoService,
-        private MessageService: MessageService
+        private entityDialogService: TipoDialogService,
+        private messageService: MessageService
     ) {
         super();
     }
 
     ngOnInit(): void {
         this.loadAll();
+        this.subscribeToChanges();
     }
 
     loadAll(): void {
@@ -40,6 +43,10 @@ export class TipoListComponent extends ListFunctions implements OnInit {
     }
 
     open(id?: number): void {
-        // this.dialogService.open(id);
+        this.entityDialogService.open(id);
+    }
+
+    subscribeToChanges(): void {
+        this.messageService.subscribe('tipo', this.loadAll.bind( this ));
     }
 }
