@@ -13,7 +13,7 @@ import { ListFunctions } from '../../utils/list-functions';
 export class DecoradoListComponent extends ListFunctions implements OnInit {
 
     entities: Decorado[] = [];
-    columnsToDisplay = ['description', 'actions'];
+    columnsToDisplay = ['photo' ,'description', 'actions'];
 
     constructor(
         private entityService: DecoradoService,
