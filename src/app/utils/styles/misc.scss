@@ -5,8 +5,12 @@
     box-sizing: content-box;
 }
 
+.border-box {
+    box-sizing: border-box;
+}
+
 .d-flex {
-    display: flex;
+    display: flex !important;
 }
 
 .flex-row {
@@ -15,6 +19,10 @@
 
 .flex-column {
     flex-direction: column;
+}
+
+.flex-grow-1 {
+    flex-grow: 1;
 }
 
 .flex-wrap {
@@ -57,6 +65,14 @@
 
 .float-right {
     float: right;
+}
+
+.img-object-contain {
+    object-fit: contain;
+}
+
+.img-object-cover {
+    object-fit: cover;
 }
 
 /* internal-light-dark */

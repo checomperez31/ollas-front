@@ -9,12 +9,14 @@ export class ListFunctions {
     page = 0;
     sorts: string[] = [];
     loading = false;
+    query = {};
 
     getRequestParams(): any {
         return {
             page: this.page,
             size: this.elementsPerPage,
-            sort: this.sorts
+            sort: this.sorts,
+            ...this.query
         };
     }
 
