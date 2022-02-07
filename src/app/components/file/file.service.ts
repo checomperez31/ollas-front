@@ -12,15 +12,25 @@ export class FileService {
         private client: HttpClient
     ) {}
 
-    create(url: string, file: File, nombre: string): Observable<HttpResponse<FileData>> {
+    create(url: string, file: File, size?: number): Observable<HttpResponse<FileData>> {
         const formData: FormData = new FormData();
         formData.append('file', file);
-        return this.client.post<FileData>(`${SERVER_URL}/api/${url}`, formData, { observe: 'response' })
+        return this.client.post<FileData>(`${SERVER_URL}/api/${url}`, formData, { observe: 'response', params: this.getParams( size ) })
+            .pipe(map((res: HttpResponse<FileData>) => this.entityFromServer(res)));
+    }
+    
+    createData(url: string, file: FileData, size?: number): Observable<HttpResponse<FileData>> {
+        return this.client.post<FileData>(`${SERVER_URL}/api/${url}/data`, file, { observe: 'response', params: this.getParams( size ) })
             .pipe(map((res: HttpResponse<FileData>) => this.entityFromServer(res)));
     }
 
     findOne(url: string, id: any): Observable<HttpResponse<FileData>> {
         return this.client.get<FileData>(`${SERVER_URL}/api/${url}/${id}`, {observe: 'response'})
+            .pipe(map((res: HttpResponse<FileData>) => this.entityFromServer(res)));
+    }
+    
+    findOneLight(url: string, id: any, size?: number): Observable<HttpResponse<FileData>> {
+        return this.client.get<FileData>(`${SERVER_URL}/api/${url}/light/${id}`, {observe: 'response', params: this.getParams( size )})
             .pipe(map((res: HttpResponse<FileData>) => this.entityFromServer(res)));
     }
 
@@ -36,5 +46,11 @@ export class FileService {
 
     public cloneEntityFromServer(entity: any): FileData {
         return Object.assign( {}, entity );
+    }
+
+    getParams(size?: number): any {
+        const value = {};
+        if (size) value['size'] = Math.max((size * 2), (48 * 2));
+        return value;
     }
 }

@@ -70,7 +70,7 @@ export abstract class FileFunctions implements OnDestroy, ControlValueAccessor {
     }
 
     handleFile(value: Event): void {
-        const element = event.target as HTMLInputElement;
+        const element = value.target as HTMLInputElement;
         let files: FileList | null = element.files;
         if( files ) {
             if (files.length > 1) {
@@ -86,8 +86,21 @@ export abstract class FileFunctions implements OnDestroy, ControlValueAccessor {
     uploadFile(file: File): void {
         this.loading = true;
         this.onChange(undefined);
-        this.file = new FileData(undefined, undefined, file.type, file.name);
-        this.service.create( this.endpoint, file, 'hola' ).subscribe({
+        if ( !this.file ) this.file = new FileData(undefined, undefined, file.type, file.name);
+        this.service.create( this.endpoint, file ).subscribe({
+            next: this.successUploadData.bind( this ),
+            error: () => {
+                this.loading = false;
+                this.onChange(undefined);
+            }
+        });
+    }
+    
+    uploadFileData(data: FileData): void {
+        this.loading = true;
+        this.onChange(undefined);
+        if ( !this.file ) this.file = data;
+        this.service.createData( this.endpoint, data ).subscribe({
             next: this.successUploadData.bind( this ),
             error: () => {
                 this.loading = false;

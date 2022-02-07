@@ -28,7 +28,7 @@ export class PhotoViewerComponent {
 
     loadEntity(): void {
         if (this._id) {
-            this.service.findOne(this.endpoint, this._id).subscribe({
+            this.service.findOneLight(this.endpoint, this._id, this.size).subscribe({
                 next: (res) => {
                     if (res) this.file = res.body;
                 },

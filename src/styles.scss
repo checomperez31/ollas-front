@@ -4,7 +4,10 @@
 @import '@angular/material/prebuilt-themes/pink-bluegrey';
 @import "./app/utils/styles";
 
-html, body { height: 100%; }
+html, body {
+  height: 100%;
+  --cropper-overlay-color: transparent;
+}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 

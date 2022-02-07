@@ -1,0 +1,19 @@
+<div>
+    <div mat-dialog-title>
+        Recortar imagen
+    </div>
+    <div mat-dialog-content>
+        <div class="row" *ngIf="entity">
+            <div class="c-20">
+                <div>
+                    <image-cropper [style.width.vw]="50" [style.height.vh]="50" [maintainAspectRatio]="false"
+                    [imageBase64]="getImgSrc()" (imageCropped)="croppedImage($event)" format="jpeg"></image-cropper>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div mat-dialog-actions align="end">
+        <button type="button" mat-button (click)="close()">Cerrar</button>
+        <button type="button" mat-button (click)="save()">Guardar</button>
+    </div>
+</div>

@@ -3,6 +3,8 @@ import { NG_VALIDATORS, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { DomSanitizer } from '@angular/platform-browser';
 import { FileFunctions } from "../file-functions";
 import { FileService } from "../file.service";
+import { PhotoCropperDialogService } from '../photo-cropper/photo-cropper-dialog.service';
+import { FileData } from '../file-data.model';
 
 @Component({
     selector: 'app-file-inline-selector',
@@ -27,7 +29,8 @@ export class FileInlineSelectorComponent extends FileFunctions {
 
     constructor(
         protected service: FileService,
-        protected sanitizer: DomSanitizer
+        protected sanitizer: DomSanitizer,
+        private editorDialogService: PhotoCropperDialogService
     ) {
         super(service, sanitizer);
     }
@@ -39,5 +42,18 @@ export class FileInlineSelectorComponent extends FileFunctions {
     @Input()
     set inline(value: any) {
         this._inline = this.validateInputBooleanValue( value );
+    }
+
+    editImage(): void {
+        this.editorDialogService.open( this.file ).afterClosed().subscribe({
+            next: this.saveImage.bind( this )
+        });;
+    }
+
+    saveImage(value?: FileData): void {
+        if ( value?.file ) {
+            value.id = undefined;
+            this.uploadFileData( value );
+        }
     }
 }

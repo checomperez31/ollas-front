@@ -1,13 +1,19 @@
 <!-- <input class="custom-file-input" type="file" id="file_foto" (change)="handleData($event.target.files)"
                [attr.accept]="typesString" #inputFile [hidden]="true" multiple/> -->
-<div class="file-container border rounded p-1" [ngClass]="{'flex-column': !inline, 'flex-row': inline}"
-    (click)="selectFile()">
-    <div class="img-container" [ngClass]="{'big-image': !inline}" *ngIf="file && file.file">
-        <img [alt]="file.fileName" [src]="getImgSrc()">
+<div class="file-container border rounded p-1" [ngClass]="{'flex-column': !inline, 'flex-row': inline}">
+    <div class="file-data" [ngClass]="{'flex-column': !inline, 'flex-row': inline}" (click)="selectFile()">
+        <div class="img-container" [ngClass]="{'big-image': !inline}" *ngIf="file && file.file">
+            <img [alt]="file.fileName" [src]="getImgSrc()">
+        </div>
+        <div class="text-container">
+            <span *ngIf="!file">No se ha seleccionado un archivo</span>
+            <span *ngIf="file">{{file.fileName}}</span>
+        </div>
     </div>
-    <div class="text-container">
-        <span *ngIf="!file">No se ha seleccionado un archivo</span>
-        <span *ngIf="file">{{file.fileName}}</span>
+    <div class="button-container" *ngIf="file">
+        <button mat-button type="button" (click)="editImage()">
+            <mat-icon>edit</mat-icon>
+        </button>
     </div>
 </div>
 <input #fileInput hidden type="file" multiple="false" (change)="handleFile($event)" [attr.accept]="getFileTypes()">
