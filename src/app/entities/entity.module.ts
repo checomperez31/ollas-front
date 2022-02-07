@@ -13,6 +13,9 @@ import { RouterModule } from '@angular/router';
             }, {
                 path: 'tipo',
                 loadChildren: () => import('./tipo/tipo.module').then(m => m.TipoModule)
+            }, {
+                path: 'inventario',
+                loadChildren: () => import('./inventario/inventario.module').then(m => m.InventarioModule)
             }
         ])
     ]

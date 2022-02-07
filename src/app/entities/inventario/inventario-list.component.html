@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="row mt-2">
+        <div class="c-20">
+            <h2>Inventario</h2>
+        </div>
+        <div class="c-20">
+            <app-decorado-multiple-selector [(ngModel)]="decoradoIds" [imageSize]="32"></app-decorado-multiple-selector>
+        </div>
+    </div>
+    <div class="row">
+        <div class="c-5 mb-1" *ngFor="let entity of entities">
+            <app-olla-card [entity]="entity"></app-olla-card>
+        </div>
+    </div>
+</div>

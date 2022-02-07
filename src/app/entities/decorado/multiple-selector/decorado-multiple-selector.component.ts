@@ -1,4 +1,4 @@
-import { Component, forwardRef, OnInit } from '@angular/core';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { DecoradoService } from '../decorado.service';
 import { Decorado } from '../decorado.model';
 import { HttpResponse } from '@angular/common/http';
@@ -21,6 +21,7 @@ export class DecoradoMultipleSelectorComponent implements OnInit, ControlValueAc
     entities: Decorado[] = [];
     idsSelected: number[] = [];
     disabled = false;
+    @Input()imageSize = 48;
 
     onChange = (_:any) => {}
     onTouch = () => {}

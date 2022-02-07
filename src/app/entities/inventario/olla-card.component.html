@@ -1,0 +1,18 @@
+<mat-card class="h-100 border-box d-flex flex-column">
+    <mat-card-header>
+        <mat-card-title>{{entity.type.description}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="flex-grow-1">
+        <div class="row">
+            <div class="c-20" #container>
+                <img *ngIf="file" class="img-object-cover" [src]="getImgSrc()" [style.width.%]="100" [style.height.px]="height">
+            </div>
+            <div class="c-20">
+                {{entity.description}}
+            </div>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-button [routerLink]="['/', 'ollas', 'edit', entity.id]">EDITAR</button>
+    </mat-card-actions>
+</mat-card>
